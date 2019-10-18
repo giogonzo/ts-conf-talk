@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [".", "../shared"],
+  "compilerOptions": {
+    "lib": ["es2020"],
+    "types": ["node", "express"]
+  }
+}

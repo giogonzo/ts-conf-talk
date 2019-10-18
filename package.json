@@ -1,0 +1,50 @@
+{
+  "name": "ts-conf-talk",
+  "version": "0.1.0",
+  "description": "playground for my TSconf it talk",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run api-start\" \"npm run web-start\"",
+    "api-start": "nodemon --watch api --watch shared --exec \"ts-node api\" --ext ts",
+    "web-start": "webpack-dev-server --mode development --config web/webpack.config.ts"
+  },
+  "keywords": [
+    "typescript",
+    "io-ts",
+    "http",
+    "api",
+    "validation"
+  ],
+  "author": "Giovanni Gonzaga <giovanni@buildo.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.12",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "@types/uuid": "^3.4.5",
+    "concurrently": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^6.2.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
+  "dependencies": {
+    "@devexperts/remote-data-ts": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fp-ts": "^2.1.0",
+    "io-ts": "^2.0.1",
+    "io-ts-types": "^0.5.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "uuid": "^3.3.3"
+  }
+}
