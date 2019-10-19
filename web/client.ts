@@ -1,11 +1,16 @@
 import { fetchAPIEndpoint } from "./fetch";
 import { User, CreateUserPayload } from "../shared/api";
+import * as t from "io-ts";
 
 export const apiClient = {
-  listUsers: fetchAPIEndpoint<number, Array<User>>(
-    "http://localhost:3456/listUsers"
+  listUsers: fetchAPIEndpoint(
+    "http://localhost:3456/listUsers",
+    t.number,
+    t.array(User)
   ),
-  createUser: fetchAPIEndpoint<CreateUserPayload, User["id"]>(
-    "http://localhost:3456/createUser"
+  createUser: fetchAPIEndpoint(
+    "http://localhost:3456/createUser",
+    CreateUserPayload,
+    User.props.id
   )
 };

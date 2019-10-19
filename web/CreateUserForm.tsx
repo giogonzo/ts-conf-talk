@@ -3,6 +3,7 @@ import * as RD from "@devexperts/remote-data-ts";
 import { pipe } from "fp-ts/lib/pipeable";
 import { User } from "../shared/api";
 import { apiClient } from "./client";
+import { isRight } from "fp-ts/lib/Either";
 
 type UserCreateStatus = RD.RemoteData<unknown, User["id"]>;
 
@@ -27,13 +28,18 @@ export const CreateUserForm: React.FunctionComponent = () => {
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    setSubmitStatus(RD.pending);
-    apiClient
-      .createUser({ name, birthDate })
-      .then(
-        userId => setSubmitStatus(RD.success(userId)),
-        err => setSubmitStatus(RD.failure(err))
-      );
+    const decodedBirthDate = User.props.birthDate.decode(birthDate);
+    if (isRight(decodedBirthDate)) {
+      setSubmitStatus(RD.pending);
+      apiClient
+        .createUser({ name, birthDate: decodedBirthDate.right })
+        .then(
+          userId => setSubmitStatus(RD.success(userId)),
+          err => setSubmitStatus(RD.failure(err))
+        );
+    } else {
+      setSubmitStatus(RD.failure("invalid date provided"));
+    }
   }
 
   return (

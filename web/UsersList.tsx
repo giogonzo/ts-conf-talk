@@ -17,7 +17,7 @@ function renderUsers(status: UsersFetchStatus): JSX.Element {
         <ul>
           {users.map(user => (
             <li key={user.id}>
-              {user.name} born on {user.birthDate}
+              {user.name} born on {user.birthDate.toLocaleDateString()}
             </li>
           ))}
         </ul>
